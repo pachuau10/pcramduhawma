@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-blue">&#128269; Search</div>
+    <div class="section-content">
+        <form method="get" action="{% url 'core:search' %}" class="search-box">
+            <input type="text" name="q" value="{{ query }}" class="retro-input search-input" placeholder="Search the site...">
+            <button type="submit" class="retro-btn">&#128269; SEARCH</button>
+        </form>
+
+        {% if query %}
+        <p class="search-results-count">Found {{ total_results }} result{{ total_results|pluralize }} for "{{ query }}"</p>
+
+        {% if results.posts %}
+        <div class="result-section">
+            <h3>&#128221; Blog Posts</h3>
+            {% for post in results.posts %}
+            <div class="result-item">
+                <a href="{% url 'blog:post_detail' slug=post.slug %}">{{ post.title }}</a>
+                <p>{{ post.excerpt|truncatewords:20 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if results.software %}
+        <div class="result-section">
+            <h3>&#128190; Software</h3>
+            {% for sw in results.software %}
+            <div class="result-item">
+                <a href="{% url 'software:software_detail' slug=sw.slug %}">{{ sw.name }} v{{ sw.version }}</a>
+                <p>{{ sw.short_description|truncatewords:20 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if results.projects %}
+        <div class="result-section">
+            <h3>&#128736; Projects</h3>
+            {% for project in results.projects %}
+            <div class="result-item">
+                <a href="{% url 'projects:project_detail' slug=project.slug %}">{{ project.name }}</a>
+                <p>{{ project.short_description|truncatewords:20 }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if total_results == 0 %}
+        <p style="font-size: 12px; color: #666;">No results found. Try different keywords.</p>
+        {% endif %}
+
+        {% else %}
+        <p style="font-size: 12px; color: #666;">Enter a search term to find content on this site.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

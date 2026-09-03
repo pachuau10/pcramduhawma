@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - Blog{% endblock %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-purple">&#128196; Category: {{ category.name }}</div>
+    <div class="section-content">
+        {% for post in posts %}
+        <div class="post-list-item">
+            <a href="{% url 'blog:post_detail' slug=post.slug %}" class="post-title-link">&raquo; {{ post.title }}</a>
+            <div class="post-date">{{ post.created_at|date:"d F Y" }}</div>
+        </div>
+        {% empty %}
+        <p style="font-size: 12px; color: #666;">No posts in this category yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

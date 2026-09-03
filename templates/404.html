@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box">
+    <div class="section-title section-title-purple">&#9888; 404 - Page Not Found</div>
+    <div class="section-content text-center">
+        <p style="font-size: 48px;" aria-hidden="true">&#128187;</p>
+        <p>Oops! This page wandered off into cyberspace.</p>
+        <p class="mt-10"><a href="{% url 'core:home' %}" class="retro-btn">&laquo; Back Home</a></p>
+    </div>
+</div>
+{% endblock %}

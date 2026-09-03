@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-purple">&#128214; Guestbook</div>
+    <div class="section-content">
+        <p style="font-size: 12px; margin-bottom: 15px;">I love connecting with fellow internet travelers! Please sign my guestbook before you leave.</p>
+
+        {% for entry in entries %}
+        <div class="guestbook-entry">
+            <div class="guestbook-message">"{{ entry.message }}"</div>
+            <div class="guestbook-author">
+                &mdash; <strong>{{ entry.name }}</strong>
+                {% if entry.website %}
+                (<a href="{{ entry.website }}" target="_blank" rel="noopener">website</a>)
+                {% endif %}
+                {{ entry.created_at|date:"d F Y" }}
+            </div>
+        </div>
+        {% empty %}
+        <p style="font-size: 12px; color: #666;">No entries yet. Be the first to sign!</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="section-box section-box-green">
+    <div class="section-title section-title-green">&#9997; Sign the Guestbook</div>
+    <div class="section-content">
+        <div class="guestbook-form">
+            <form method="post" action="{% url 'guestbook:guestbook_list' %}">
+                {% csrf_token %}
+                <div style="display:none;" aria-hidden="true">{{ form.website_confirm }}</div>
+
+                {% if form.errors %}
+                <div class="message message-error" style="margin-bottom: 10px;">
+                    Please correct the errors below.
+                </div>
+                {% endif %}
+
+                <div class="form-row">
+                    <label for="id_name">Name: *</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                    <div style="color: #cc0000; font-size: 11px;">{{ form.name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-row">
+                    <label for="id_email">Email: (optional)</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                    <div style="color: #cc0000; font-size: 11px;">{{ form.email.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-row">
+                    <label for="id_website">Website: (optional)</label>
+                    {{ form.website }}
+                    {% if form.website.errors %}
+                    <div style="color: #cc0000; font-size: 11px;">{{ form.website.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-row">
+                    <label for="id_message">Message: *</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}
+                    <div style="color: #cc0000; font-size: 11px;">{{ form.message.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="retro-btn retro-btn-green">&#9997; Sign Guestbook</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

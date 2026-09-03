@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-blue">&#128196; Welcome!</div>
+    <div class="section-content">
+        <div class="welcome-box">
+            <div class="welcome-text">
+                <p>Hi! I'm PC Ramduhawma, a B.Tech Computer Science and Engineering student and developer who enjoys building things,exploring technology, and experimenting with new ideas.</p>
+                <p>This is my personal corner of the internet where I write about:</p>
+                <ul class="welcome-two-col">
+                    <li>Technology</li>
+                    <li>Programming</li>
+                    <li>Random thoughts</li>
+                    <li>Projects</li>
+                    <li>Software I build</li>
+                    <li>Experiments</li>
+                    <li>Life</li>
+                </ul>
+                <p><a href="{% url 'core:about' %}">Explore around</a> and feel free to <a href="{% url 'guestbook:guestbook_list' %}">sign my guestbook</a>!</p>
+            </div>
+            {% if site_settings.profile_image %}
+            <img src="{{ site_settings.profile_image.url }}" alt="PC Ramduhawma" class="welcome-image">
+            {% else %}
+            <img src="{% static 'images/profile.png' %}" alt="PC Ramduhawma at computer" class="welcome-image">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="home-grid-3">
+    <div class="section-box home-box-blog">
+        <div class="section-title home-title-blog">&#128196; Latest Blog Posts</div>
+        <div class="section-content">
+            {% for post in latest_posts %}
+            <div class="home-list-item">
+                <div class="home-list-head"><span class="home-bullet">&#9654;</span> <a href="{% url 'blog:post_detail' slug=post.slug %}">{{ post.title }}</a></div>
+                <div class="home-list-sub">{{ post.created_at|date:"d M Y" }}</div>
+            </div>
+            {% empty %}
+            <p class="home-empty">No blog posts yet. Check back soon!</p>
+            {% endfor %}
+            <div class="home-more"><a href="{% url 'blog:post_list' %}">&raquo; Read more posts...</a></div>
+        </div>
+    </div>
+
+    <div class="section-box home-box-software">
+        <div class="section-title home-title-software">&#128190; Latest Software</div>
+        <div class="section-content">
+            {% for sw in latest_software %}
+            <div class="home-list-item">
+                <div class="home-list-head"><span class="home-bullet">&#9654;</span> <a href="{% url 'software:software_detail' slug=sw.slug %}">{{ sw.name }} v{{ sw.version }}</a></div>
+                <div class="home-list-sub">{{ sw.get_platform_display }}{% if sw.file_size %} &bull; {{ sw.file_size_display }}{% endif %}</div>
+                <div class="home-list-links">[ <a href="{% url 'software:software_download' slug=sw.slug %}">DOWNLOAD</a> ] [ <a href="{% url 'software:software_detail' slug=sw.slug %}">INFO</a> ]</div>
+            </div>
+            {% empty %}
+            <p class="home-empty">No software yet. Check back soon!</p>
+            {% endfor %}
+            <div class="home-more"><a href="{% url 'software:software_list' %}">&raquo; View all software...</a></div>
+        </div>
+    </div>
+
+    <div class="section-box home-box-projects">
+        <div class="section-title home-title-projects">&#128736; Projects</div>
+        <div class="section-content">
+            {% for project in latest_projects %}
+            <div class="home-list-item">
+                <div class="home-list-head"><span class="home-bullet">&#9654;</span> <a href="{% url 'projects:project_detail' slug=project.slug %}">{{ project.name }}</a></div>
+                {% if project.short_description %}
+                <div class="home-list-sub">{{ project.short_description|truncatewords:10 }}</div>
+                {% endif %}
+                <div class="home-list-links">[ <a href="{% url 'projects:project_detail' slug=project.slug %}">VIEW PROJECT</a> ]</div>
+            </div>
+            {% empty %}
+            <p class="home-empty">No projects yet. Check back soon!</p>
+            {% endfor %}
+            <div class="home-more"><a href="{% url 'projects:project_list' %}">&raquo; View all projects...</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="home-grid-2">
+    <div class="section-box home-box-guestbook">
+        <div class="section-title home-title-guestbook">&#128214; Guestbook</div>
+        <div class="section-content home-split">
+            <div class="home-split-text">
+                <p>I love connecting with fellow internet travelers! Please sign my guestbook before you leave.</p>
+                {% for entry in recent_guestbook %}
+                <div class="home-gb-preview"><em>"{{ entry.message|truncatewords:12 }}"</em> &mdash; <strong>{{ entry.name }}</strong></div>
+                {% endfor %}
+                <div class="home-more"><a href="{% url 'guestbook:guestbook_list' %}">&raquo; Sign the guestbook!</a></div>
+            </div>
+            <div class="home-split-art" aria-hidden="true">&#128214;&#9997;</div>
+        </div>
+    </div>
+
+    <div class="section-box home-box-working">
+        <div class="section-title home-title-working">&#128187; What I'm Working On</div>
+        <div class="section-content home-split">
+            <div class="home-split-text">
+                {% for project in working_on_projects %}
+                <div class="home-list-item">
+                    <div class="home-list-head"><span class="home-bullet">&#9654;</span> <a href="{% url 'projects:project_detail' slug=project.slug %}">{{ project.name }}</a></div>
+                    {% if project.short_description %}
+                    <div class="home-list-sub">{{ project.short_description|truncatewords:12 }}</div>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <p>Always learning. Always building. Check out my <a href="{% url 'projects:project_list' %}">projects</a> and software!</p>
+                {% endfor %}
+                {% if working_on_projects %}
+                <p class="home-empty">More updates coming soon...</p>
+                {% endif %}
+            </div>
+            <div class="home-split-art under-construction-mini" aria-hidden="true">UNDER<br>CONSTRUCTION</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

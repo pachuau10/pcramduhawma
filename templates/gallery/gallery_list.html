@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-purple">&#128247; Gallery</div>
+    <div class="section-content">
+        <div class="gallery-grid">
+            {% for image in images %}
+            <div class="gallery-item">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-item-image" title="{{ image.title }}">
+                <div class="gallery-item-title">{{ image.title }}</div>
+            </div>
+            {% empty %}
+            <p style="font-size: 12px; color: #666;">No images in the gallery yet. Check back soon!</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

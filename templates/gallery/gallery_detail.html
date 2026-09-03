@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load seo_tags %}
+
+{% block title %}{{ image.title }} | PC Ramduhawma — Retro Tech{% endblock %}
+{% block og_title %}{{ image.title }}{% endblock %}
+{% block og_image %}{% if image.image %}{{ image.image.url|absurl:request }}{% else %}{{ default_og_image }}{% endif %}{% endblock %}
+{% block twitter_title %}{{ image.title }}{% endblock %}
+{% block twitter_image %}{% if image.image %}{{ image.image.url|absurl:request }}{% else %}{{ default_og_image }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-content gallery-detail">
+        <h1 class="gallery-detail-title">{{ image.title }}</h1>
+        <img src="{{ image.image.url }}" alt="{{ image.title }}" class="gallery-detail-image">
+        {% if image.description %}
+        <p class="gallery-detail-desc">{{ image.description }}</p>
+        {% endif %}
+        <p style="font-size: 11px; color: #666; margin-top: 10px;">{{ image.created_at|date:"d F Y" }}</p>
+        <hr class="retro-hr">
+        <div style="font-size: 11px;">
+            <a href="{% url 'gallery:gallery_list' %}">&laquo; Back to Gallery</a>
+        </div>
+        <div class="back-to-top">
+            <a href="#">&#9650; Back to Top &#9650;</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

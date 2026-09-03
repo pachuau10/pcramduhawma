@@ -1,0 +1,122 @@
+[
+  {
+    "model": "core.sitesettings",
+    "pk": 1,
+    "fields": {
+      "site_name": "PC Ramduhawma's Homepage",
+      "tagline": "Thoughts. Code. Life.",
+      "welcome_message": "Welcome to my corner of the internet!",
+      "about_text": "Hi! I'm PC Ramduhawma, a software developer and student who loves building things for the web and experimenting with technology.\n\nThis website is my personal corner of the internet where I share my thoughts, projects, and the software I create.",
+      "footer_message": "Thanks for visiting!",
+      "email": "",
+      "github_url": "",
+      "meta_description": "PC Ramduhawma's personal homepage - Thoughts, Code, Life. A developer's corner of the internet.",
+      "created_date": "2025-06-01"
+    }
+  },
+  {
+    "model": "core.visitorcount",
+    "pk": 1,
+    "fields": {
+      "total_visits": 1,
+      "unique_visitors": 1,
+      "last_updated": "2025-06-01T00:00:00"
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 1,
+    "fields": {
+      "name": "Home",
+      "url": "/",
+      "icon": "\ud83c\udfe0",
+      "order": 1,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 2,
+    "fields": {
+      "name": "About Me",
+      "url": "/about/",
+      "icon": "\ud83d\udc64",
+      "order": 2,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 3,
+    "fields": {
+      "name": "Blog",
+      "url": "/blog/",
+      "icon": "\ud83d\udcdd",
+      "order": 3,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 4,
+    "fields": {
+      "name": "Downloads",
+      "url": "/software/",
+      "icon": "\ud83d\udcbe",
+      "order": 4,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 5,
+    "fields": {
+      "name": "Projects",
+      "url": "/projects/",
+      "icon": "\ud83d\udee0",
+      "order": 5,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 6,
+    "fields": {
+      "name": "Gallery",
+      "url": "/gallery/",
+      "icon": "\ud83d\udcf7",
+      "order": 6,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 7,
+    "fields": {
+      "name": "Guestbook",
+      "url": "/guestbook/",
+      "icon": "\ud83d\udcd6",
+      "order": 7,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  },
+  {
+    "model": "core.navigationitem",
+    "pk": 8,
+    "fields": {
+      "name": "Contact",
+      "url": "/contact/",
+      "icon": "\u2709",
+      "order": 8,
+      "is_active": true,
+      "open_in_new_tab": false
+    }
+  }
+]

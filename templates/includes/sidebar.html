@@ -1,0 +1,48 @@
+{% load static %}
+<div class="sidebar-section nav-section">
+    <h3 class="sidebar-title">Navigation</h3>
+    <nav class="retro-nav">
+        {% for item in navigation_items %}
+        <a href="{{ item.url }}" class="nav-link"{% if item.open_in_new_tab %} target="_blank" rel="noopener"{% endif %}>
+            <span class="nav-icon">{{ item.icon }}</span> {{ item.name }}
+        </a>
+        {% empty %}
+        <a href="{% url 'core:home' %}" class="nav-link"><span class="nav-icon">&#127968;</span> Home</a>
+        <a href="{% url 'core:about' %}" class="nav-link"><span class="nav-icon">&#128100;</span> About Me</a>
+        <a href="{% url 'blog:post_list' %}" class="nav-link"><span class="nav-icon">&#128221;</span> Blog</a>
+        <a href="{% url 'software:software_list' %}" class="nav-link"><span class="nav-icon">&#128190;</span> Downloads</a>
+        <a href="{% url 'projects:project_list' %}" class="nav-link"><span class="nav-icon">&#128736;</span> Projects</a>
+        <a href="{% url 'gallery:gallery_list' %}" class="nav-link"><span class="nav-icon">&#128247;</span> Gallery</a>
+        <a href="{% url 'guestbook:guestbook_list' %}" class="nav-link"><span class="nav-icon">&#128214;</span> Guestbook</a>
+        <a href="{% url 'core:contact' %}" class="nav-link"><span class="nav-icon">&#9993;</span> Contact</a>
+        {% endfor %}
+    </nav>
+</div>
+
+<div class="sidebar-section counter-section">
+    <h3 class="sidebar-title">Site Info</h3>
+    <p class="counter-label">You are visitor #</p>
+    <div class="visitor-counter">
+        <span class="counter-digits">{{ visitor_count.total_visits|default:"0000000"|stringformat:"07d" }}</span>
+    </div>
+    <p class="counter-thanks">Thanks for stopping by!</p>
+</div>
+
+<div class="sidebar-section webring-section">
+    <h3 class="sidebar-title">Webrings</h3>
+    <p class="webring-label">Member of:</p>
+    <div class="webring-box">
+        <span class="webring-icon">&#127760;</span>
+        <span class="webring-name">Personal Home Page Ring</span>
+    </div>
+    <div class="webring-links">
+        <a href="#">Prev</a> | <a href="#">Random</a> | <a href="#">Next</a> | <a href="#">Join</a>
+    </div>
+</div>
+
+<div class="sidebar-section site-info-section">
+    <h3 class="sidebar-title">Site Info</h3>
+    <p class="info-line">Created: 2025</p>
+    <p class="info-line">Powered by: Django</p>
+    <p class="info-line">Hosted on: PythonAnywhere</p>
+</div>

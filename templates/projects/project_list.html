@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-green">
+    <div class="section-title section-title-green">&#128736; Projects</div>
+    <div class="section-content">
+        {% for project in projects %}
+        <div class="project-card">
+            <div class="project-card-header">
+                <div class="project-card-title">{{ project.name }}</div>
+            </div>
+            <div class="project-card-body">
+                <p class="project-card-desc">{{ project.short_description|default:project.description|truncatewords:30 }}</p>
+
+                {% if project.tech_list %}
+                <div class="project-tech">
+                    {% for tech in project.tech_list %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="project-status status-{{ project.status }}">
+                    {% if project.status == 'active' %}&#128994; Active
+                    {% elif project.status == 'completed' %}&#128308; Completed
+                    {% elif project.status == 'on_hold' %}&#128992; On Hold
+                    {% else %}&#9898; Archived{% endif %}
+                </div>
+
+                <div class="project-actions">
+                    <a href="{% url 'projects:project_detail' slug=project.slug %}" class="retro-btn retro-btn-small">View Project</a>
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="retro-btn retro-btn-small">&#127760; Live Demo</a>
+                    {% endif %}
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="retro-btn retro-btn-small">&#128187; GitHub</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="font-size: 12px; color: #666;">No projects yet. Check back soon!</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

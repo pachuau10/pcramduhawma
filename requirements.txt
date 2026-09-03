@@ -1,0 +1,10 @@
+Django==5.0.14
+Pillow==11.3.0
+cloudinary==1.44.1
+django-cloudinary-storage==0.3.0
+dj-database-url==3.0.1
+psycopg2-binary==2.9.10
+gunicorn==23.0.0
+whitenoise==6.8.2
+django-ratelimit==4.1.0
+python-dotenv==1.1.0

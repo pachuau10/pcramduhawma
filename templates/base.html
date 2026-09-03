@@ -1,0 +1,55 @@
+{% load static seo_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PC Ramduhawma — Retro Tech{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}A nostalgic corner of the internet dedicated to technology, computers, experiments, projects, and the good old web — inspired by the weird and wonderful internet of the early 2000s.{% endblock %}">
+    <meta name="author" content="PC Ramduhawma">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:site_name" content="PC Ramduhawma — Retro Tech">
+    <meta property="og:title" content="{% block og_title %}PC Ramduhawma — Retro Tech{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Welcome to my little corner of the internet — technology, computers, projects, experiments and a nostalgic journey back to the old web.{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{% block og_image %}{{ default_og_image }}{% endblock %}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}PC Ramduhawma — Retro Tech{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Technology, computers, experiments and a nostalgic trip back to the old internet.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ default_og_image }}{% endblock %}">
+    <link rel="stylesheet" href="{% static 'css/retro.css' %}">
+    <link rel="icon" type="image/svg+xml" href="{% if site_settings.favicon %}{{ site_settings.favicon.url }}{% else %}{% static 'images/favicon.svg' %}{% endif %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        {% include 'includes/announcement_bar.html' %}
+        {% include 'includes/header.html' %}
+
+        <div class="main-layout">
+            <aside class="sidebar" id="sidebar">
+                {% include 'includes/sidebar.html' %}
+            </aside>
+            <main class="content">
+                {% if messages %}
+                <div class="messages-box">
+                    {% for message in messages %}
+                    <div class="message message-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+
+        {% include 'includes/footer.html' %}
+    </div>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar"><span aria-hidden="true">&#9776;</span></button>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

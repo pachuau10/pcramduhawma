@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-purple">&#128221; Blog</div>
+    <div class="section-content">
+        {% for post in page_obj %}
+        <div class="post-list-item">
+            <a href="{% url 'blog:post_detail' slug=post.slug %}" class="post-title-link">&raquo; {{ post.title }}</a>
+            <div class="post-date">{{ post.created_at|date:"d F Y" }}</div>
+            {% if post.excerpt %}
+            <div class="post-excerpt">{{ post.excerpt|truncatewords:30 }}</div>
+            {% endif %}
+            {% if post.category %}
+            <span style="font-size: 10px; color: #999;">Category: {{ post.category.name }}</span>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p style="font-size: 12px; color: #666;">No blog posts yet. Check back soon!</p>
+        {% endfor %}
+
+        {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <span class="current">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load seo_tags %}
+
+{% block title %}{{ software.name }} v{{ software.version }} | PC Ramduhawma — Retro Tech{% endblock %}
+{% block meta_description %}{% if software.short_description %}{{ software.short_description }}{% else %}{{ software.description|truncatewords:30 }}{% endif %}{% endblock %}
+{% block og_title %}{{ software.name }} v{{ software.version }}{% endblock %}
+{% block og_description %}{% if software.short_description %}{{ software.short_description }}{% else %}{{ software.description|truncatewords:30 }}{% endif %}{% endblock %}
+{% block twitter_title %}{{ software.name }} v{{ software.version }}{% endblock %}
+{% block twitter_description %}{% if software.short_description %}{{ software.short_description }}{% else %}{{ software.description|truncatewords:30 }}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-content">
+        <div class="software-detail-header">
+            <h1 class="software-detail-title">{{ software.name }}</h1>
+            <div class="software-detail-meta">
+                <span>Version: {{ software.version }}</span>
+                <span>Released: {{ software.release_date|date:"d F Y" }}</span>
+                <span>Platform: {{ software.get_platform_display }}</span>
+                <span>Architecture: {{ software.get_architecture_display }}</span>
+            </div>
+        </div>
+
+        <p style="margin-bottom: 15px;">{{ software.description|linebreaksbr }}</p>
+
+        <div class="software-actions" style="margin-bottom: 15px;">
+            <a href="{% url 'software:software_download' slug=software.slug %}" class="retro-btn retro-btn-green">&#128190; DOWNLOAD</a>
+            {% if software.source_url %}
+            <a href="{{ software.source_url }}" target="_blank" rel="noopener" class="retro-btn">&#128279; SOURCE CODE</a>
+            {% endif %}
+            {% if software.website_url %}
+            <a href="{{ software.website_url }}" target="_blank" rel="noopener" class="retro-btn">&#127760; WEBSITE</a>
+            {% endif %}
+        </div>
+
+        <div class="software-meta" style="margin-bottom: 15px;">
+            <span class="software-meta-item">&#128207; Size: {{ software.file_size_display }}</span>
+            <span class="software-meta-item">&#128176; License: {{ software.license }}</span>
+            <span class="software-meta-item">&#128225; Downloads: {{ software.download_count }}</span>
+            {% if software.file_extension %}
+            <span class="software-meta-item">&#128196; Format: {{ software.file_extension }}</span>
+            {% endif %}
+        </div>
+
+        {% if software.features %}
+        <div class="software-detail-features">
+            <h3>&#10004; Features</h3>
+            <ul>
+                {% for feature in software.features.splitlines %}
+                {% if feature.strip %}
+                <li>{{ feature.strip }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if software.requirements %}
+        <div class="software-detail-section">
+            <h3>&#128187; Requirements</h3>
+            <p>{{ software.requirements|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        {% if software.installation %}
+        <div class="software-detail-section">
+            <h3>&#128221; Installation</h3>
+            <p>{{ software.installation|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        {% if software.changelog %}
+        <div class="software-detail-section">
+            <h3>&#128220; Changelog</h3>
+            <p>{{ software.changelog|linebreaksbr }}</p>
+        </div>
+        {% endif %}
+
+        {% if software.screenshots.all %}
+        <div class="software-detail-section">
+            <h3>&#128247; Screenshots</h3>
+            <div class="software-screenshots">
+                {% for screenshot in software.screenshots.all %}
+                <img src="{{ screenshot.image.url }}" alt="{{ screenshot.caption }}" class="screenshot-thumb" title="{{ screenshot.caption }}">
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <hr class="retro-hr">
+
+        <div style="font-size: 11px; color: #666;">
+            <a href="{% url 'software:software_list' %}">&laquo; Back to Downloads</a>
+        </div>
+
+        <div class="back-to-top">
+            <a href="#">&#9650; Back to Top &#9650;</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

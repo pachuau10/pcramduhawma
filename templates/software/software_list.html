@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title" style="color: #990066; background: var(--section-bg-pink); border-bottom: 2px solid #990066;">&#128190; Software Downloads</div>
+    <div class="section-content">
+        <p style="font-size: 12px; margin-bottom: 15px;">Here you can download software that I've personally created. All downloads are free!</p>
+
+        {% for sw in software_items %}
+        <div class="software-card">
+            <div class="software-card-header">
+                <div class="software-card-title">{{ sw.name }}</div>
+                <div class="software-card-version">v{{ sw.version }}</div>
+            </div>
+            <div class="software-card-body">
+                <p class="software-card-desc">{{ sw.short_description|default:sw.description|truncatewords:30 }}</p>
+
+                <div class="software-meta">
+                    <span class="software-meta-item">&#128187; {{ sw.get_platform_display }}</span>
+                    <span class="software-meta-item">&#128207; {{ sw.file_size_display }}</span>
+                    <span class="software-meta-item">&#128197; {{ sw.release_date|date:"d M Y" }}</span>
+                </div>
+
+                <div class="software-actions">
+                    <a href="{% url 'software:software_detail' slug=sw.slug %}" class="retro-btn retro-btn-small">View Details</a>
+                    <a href="{% url 'software:software_download' slug=sw.slug %}" class="retro-btn retro-btn-green retro-btn-small">&#128190; Download</a>
+                </div>
+
+                <div class="download-count">Downloads: {{ sw.download_count }}</div>
+            </div>
+        </div>
+        {% empty %}
+        <p style="font-size: 12px; color: #666;">No software available yet. Check back soon!</p>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}

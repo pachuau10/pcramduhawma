@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section-box section-box-blue">
+    <div class="section-title section-title-blue">&#128100; About PC Ramduhawma</div>
+    <div class="section-content about-content">
+        {% if settings.profile_image %}
+        <div style="float: right; margin: 0 0 10px 15px;">
+            <img src="{{ settings.profile_image.url }}" alt="PC Ramduhawma" style="width: 150px; border: 2px solid var(--border-color);">
+        </div>
+        {% else %}
+        <div style="float: right; margin: 0 0 10px 15px;">
+            <img src="{% static 'images/profile.png' %}" alt="PC Ramduhawma" style="width: 150px; border: 2px solid var(--border-color);">
+        </div>
+        {% endif %}
+
+        <h2>Hello!</h2>
+        <p>I'm PC Ramduhawma, a software developer and student who loves building things for the web and experimenting with technology.</p>
+
+        <p>This website is my personal corner of the internet where I share my thoughts, projects, and the software I create.</p>
+
+        {% if settings.about_text %}
+        <div>{{ settings.about_text|linebreaksbr }}</div>
+        {% else %}
+        <h2>What I Do</h2>
+        <ul>
+            <li>Web development with Python and Django</li>
+            <li>Building desktop applications</li>
+            <li>Learning new technologies</li>
+            <li>Contributing to open source</li>
+            <li>Writing about technology</li>
+        </ul>
+
+        <h2>Technologies I Work With</h2>
+        <div class="about-skills">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Django</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Windows</span>
+        </div>
+
+        <h2>About This Website</h2>
+        <p>This website is built with Django and designed to look like a personal homepage from the early 2000s. It features:</p>
+        <ul>
+            <li>A blog where I write about technology and life</li>
+            <li>Software downloads for apps I've created</li>
+            <li>A projects showcase</li>
+            <li>A photo gallery</li>
+            <li>A guestbook for visitors</li>
+        </ul>
+
+        <h2>Get In Touch</h2>
+        <p>Feel free to reach out through any of these channels:</p>
+        <ul>
+            {% if settings.email %}<li>Email: <a href="mailto:{{ settings.email }}">{{ settings.email }}</a></li>{% endif %}
+            {% if settings.github_url %}<li>GitHub: <a href="{{ settings.github_url }}" target="_blank" rel="noopener">{{ settings.github_url }}</a></li>{% endif %}
+            {% if settings.twitter_url %}<li>Twitter: <a href="{{ settings.twitter_url }}" target="_blank" rel="noopener">{{ settings.twitter_url }}</a></li>{% endif %}
+            {% if settings.discord_url %}<li>Discord: <a href="{{ settings.discord_url }}" target="_blank" rel="noopener">{{ settings.discord_url }}</a></li>{% endif %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div class="back-to-top">
+    <a href="#">&#9650; Back to Top &#9650;</a>
+</div>
+{% endblock %}
