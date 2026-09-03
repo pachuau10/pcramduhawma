@@ -110,6 +110,16 @@ STORAGES = {
 
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',') if o.strip()]
 
+VERCEL_URL = os.environ.get('VERCEL_URL', '').strip()
+if VERCEL_URL:
+    if VERCEL_URL not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(VERCEL_URL)
+    if '.vercel.app' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append('.vercel.app')
+    vercel_origin = f'https://{VERCEL_URL}'
+    if vercel_origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(vercel_origin)
+
 SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000').rstrip('/')
 
 SECURE_BROWSER_XSS_FILTER = True
