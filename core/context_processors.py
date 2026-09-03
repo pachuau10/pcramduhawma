@@ -39,7 +39,7 @@ def site_settings(request):
         default_og_image = ''
     if not default_og_image:
         try:
-            default_og_image = request.build_absolute_uri(static('images/og-image.png'))
+            default_og_image = request.build_absolute_uri(static('images/profile.png'))
         except Exception:
             default_og_image = ''
 
