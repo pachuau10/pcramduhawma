@@ -20,13 +20,13 @@ html[data-theme="modern"] {
     --mradius: 14px;
 }
 
-/* ---------- Retro-mode toggle: small navy 3D computer button ---------- */
+/* ---------- Retro-mode toggle: nav-flow navy 3D computer button ---------- */
 html[data-theme="retro"] .theme-toggle,
 html:not([data-theme]) .theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    z-index: 5;
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    min-height: 44px;
     background: #1b2452;
     color: #cdd6ff;
     border: 2px solid;
@@ -36,10 +36,9 @@ html:not([data-theme]) .theme-toggle {
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 8px 10px;
     cursor: pointer;
     box-shadow: 1px 1px 0 #000000;
-    white-space: nowrap;
 }
 
 html[data-theme="retro"] .theme-toggle:hover,
@@ -54,13 +53,6 @@ html:not([data-theme]) .theme-toggle:active {
     transform: translateY(1px);
     box-shadow: none;
     border-color: #10163a #565fae #565fae #10163a;
-}
-
-html[data-theme="retro"] .theme-toggle-nav,
-html:not([data-theme]) .theme-toggle-nav {
-    position: static;
-    width: 100%;
-    margin-top: 8px;
 }
 
 /* ---------- Base ---------- */
@@ -1351,17 +1343,6 @@ html[data-theme="modern"] textarea:focus-visible {
 
     html[data-theme="modern"] .screenshot-thumb {
         width: 100%;
-    }
-}
-
-/* ---------- Retro toggle on small screens: clear of the burger ---------- */
-@media (max-width: 768px) {
-    html[data-theme="retro"] .theme-toggle:not(.theme-toggle-nav),
-    html:not([data-theme]) .theme-toggle:not(.theme-toggle-nav) {
-        top: 8px;
-        right: 58px;
-        font-size: 10px;
-        padding: 5px 10px;
     }
 }
 
