@@ -24,9 +24,9 @@
             btn.setAttribute('aria-pressed', modern ? 'true' : 'false');
             btn.setAttribute('aria-label', modern ? 'Return to retro mode' : 'Switch to modern mode');
             var label = btn.querySelector('[data-theme-label]');
-            if (label) label.textContent = modern ? 'Retro' : 'Modern';
+            if (label) label.textContent = modern ? 'Retro Mode' : 'Modern Mode →';
             var icon = btn.querySelector('[data-theme-icon]');
-            if (icon) icon.textContent = modern ? '🖥️' : '✨';
+            if (icon) icon.textContent = modern ? '🖥️' : '💻';
         });
         if (animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.documentElement.classList.add('theme-fade');
