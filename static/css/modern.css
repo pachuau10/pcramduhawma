@@ -20,25 +20,46 @@ html[data-theme="modern"] {
     --mradius: 14px;
 }
 
-/* ---------- Retro-mode toggle: nav-flow navy 3D computer button ---------- */
+/* ---------- Retro-mode toggle: prominent nav-flow 3D button ---------- */
+html[data-theme="retro"] .theme-toggle-sep,
+html:not([data-theme]) .theme-toggle-sep {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 2px 6px;
+    color: #ffcc00;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+html[data-theme="retro"] .theme-toggle-sep::before,
+html[data-theme="retro"] .theme-toggle-sep::after,
+html:not([data-theme]) .theme-toggle-sep::before,
+html:not([data-theme]) .theme-toggle-sep::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid #4a55a2;
+}
+
 html[data-theme="retro"] .theme-toggle,
 html:not([data-theme]) .theme-toggle {
     display: block;
     width: 100%;
-    margin-top: 8px;
-    min-height: 44px;
-    background: #1b2452;
-    color: #cdd6ff;
+    min-height: 48px;
+    background: #232c68;
+    color: #ffffff;
     border: 2px solid;
-    border-color: #565fae #10163a #10163a #565fae;
+    border-color: #7c86e0 #10163a #10163a #7c86e0;
     font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 8px 10px;
+    padding: 10px 12px;
     cursor: pointer;
-    box-shadow: 1px 1px 0 #000000;
+    box-shadow: 2px 2px 0 #000000;
 }
 
 html[data-theme="retro"] .theme-toggle:hover,
@@ -1343,6 +1364,21 @@ html[data-theme="modern"] textarea:focus-visible {
 
     html[data-theme="modern"] .screenshot-thumb {
         width: 100%;
+    }
+}
+
+/* ---------- Retro toggle: comfortable tap target on touch ---------- */
+@media (max-width: 768px) {
+    html[data-theme="retro"] .theme-toggle,
+    html:not([data-theme]) .theme-toggle {
+        font-size: 13px;
+        min-height: 52px;
+        padding: 12px;
+    }
+
+    html[data-theme="retro"] .theme-toggle-sep,
+    html:not([data-theme]) .theme-toggle-sep {
+        font-size: 11px;
     }
 }
 
