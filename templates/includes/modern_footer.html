@@ -1,0 +1,23 @@
+{% load static %}
+<footer class="m-footer">
+    <div class="m-footer-inner">
+        <div class="m-footer-brand">
+            <span class="m-brand-text">PC Ramduhawma</span>
+            <p class="m-footer-tag">Thoughts. Code. Life.</p>
+        </div>
+        <nav class="m-footer-links" aria-label="Footer">
+            <a href="{% url 'core:home' %}">Home</a>
+            <a href="{% url 'core:about' %}">About</a>
+            <a href="{% url 'blog:post_list' %}">Blog</a>
+            <a href="{% url 'projects:project_list' %}">Projects</a>
+            <a href="{% url 'software:software_list' %}">Software</a>
+            {% if site_settings.github_url %}<a href="{{ site_settings.github_url }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+            <a href="{% url 'core:contact' %}">Contact</a>
+        </nav>
+        <div class="m-footer-meta">
+            <span class="m-counter">visitor #{{ visitor_count.total_visits|default:"0000000"|stringformat:"07d" }}</span>
+            <span>© {% now "Y" %} PC Ramduhawma</span>
+            <button type="button" class="m-theme-btn m-theme-btn-ghost" data-theme-toggle aria-pressed="false" aria-label="Switch to modern mode"><span data-theme-icon aria-hidden="true">✨</span> <span data-theme-label>Modern</span></button>
+        </div>
+    </div>
+</footer>

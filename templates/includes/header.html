@@ -7,6 +7,10 @@
         <h1 class="site-title">{{ site_settings.site_name|default:"PC Ramduhawma's Homepage" }}</h1>
         <p class="site-tagline">{{ site_settings.tagline|default:"Thoughts. Code. Life." }}</p>
         <p class="site-welcome">{{ site_settings.welcome_message|default:"Welcome to my corner of the internet!" }}</p>
+        <div class="hero-actions" aria-label="Featured sections">
+            <a href="{% url 'projects:project_list' %}" class="retro-btn">View Projects</a>
+            <a href="{% url 'software:software_list' %}" class="retro-btn retro-btn-green">Explore Software</a>
+        </div>
     </div>
     <div class="header-decoration-right">
         <img src="{% static 'images/retro-earth.svg' %}" alt="Retro Globe" class="header-globe-img">

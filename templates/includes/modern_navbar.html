@@ -1,0 +1,28 @@
+{% load static %}
+<nav class="m-nav" aria-label="Primary">
+    <div class="m-nav-inner">
+        <a href="{% url 'core:home' %}" class="m-brand" aria-label="PC Ramduhawma — home">
+            <span class="m-brand-mark" aria-hidden="true">▚</span>
+            <span class="m-brand-text">PC Ramduhawma</span>
+        </a>
+        <div class="m-nav-links" role="menubar">
+            <a href="{% url 'core:home' %}" class="m-nav-link{% if active_nav == 'home' %} is-active{% endif %}"{% if active_nav == 'home' %} aria-current="page"{% endif %}>Home</a>
+            <a href="{% url 'blog:post_list' %}" class="m-nav-link{% if active_nav == 'blog' %} is-active{% endif %}"{% if active_nav == 'blog' %} aria-current="page"{% endif %}>Blog</a>
+            <a href="{% url 'projects:project_list' %}" class="m-nav-link{% if active_nav == 'projects' %} is-active{% endif %}"{% if active_nav == 'projects' %} aria-current="page"{% endif %}>Projects</a>
+            <a href="{% url 'software:software_list' %}" class="m-nav-link{% if active_nav == 'software' %} is-active{% endif %}"{% if active_nav == 'software' %} aria-current="page"{% endif %}>Software</a>
+            <div class="m-dropdown" data-dropdown>
+                <button type="button" class="m-nav-link m-dropdown-btn" data-dropdown-btn aria-haspopup="true" aria-expanded="false" aria-controls="mDropdownMenu">More <span class="m-dropdown-caret" aria-hidden="true">▾</span></button>
+                <div class="m-dropdown-menu" id="mDropdownMenu" role="menu" data-dropdown-menu hidden>
+                    <a href="{% url 'core:about' %}" role="menuitem" class="m-dropdown-link{% if active_nav == 'about' %} is-active{% endif %}">About</a>
+                    <a href="{% url 'gallery:gallery_list' %}" role="menuitem" class="m-dropdown-link{% if active_nav == 'gallery' %} is-active{% endif %}">Gallery</a>
+                    <a href="{% url 'guestbook:guestbook_list' %}" role="menuitem" class="m-dropdown-link{% if active_nav == 'guestbook' %} is-active{% endif %}">Guestbook</a>
+                    <a href="{% url 'core:contact' %}" role="menuitem" class="m-dropdown-link{% if active_nav == 'contact' %} is-active{% endif %}">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="m-nav-side">
+            <button type="button" class="m-theme-btn" data-theme-toggle aria-pressed="false" aria-label="Switch to modern mode"><span data-theme-icon aria-hidden="true">✨</span> <span data-theme-label>Modern</span></button>
+            <button type="button" class="m-burger" data-mobile-open aria-label="Open navigation menu" aria-expanded="false" aria-controls="mMobileMenu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+        </div>
+    </div>
+</nav>

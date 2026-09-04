@@ -37,6 +37,9 @@
     }
 
     window.pcTheme = { get: read, set: function(t) { paint(t, true); } };
+    window.pcIsModern = function() {
+        return document.documentElement.dataset.theme === 'modern';
+    };
 
     document.addEventListener('DOMContentLoaded', function() {
         paint(read(), false);
@@ -47,6 +50,109 @@
         });
     });
 })();
+
+// Modern dropdowns (desktop + mobile tap groups)
+document.addEventListener('DOMContentLoaded', function() {
+    function closeAll(except) {
+        document.querySelectorAll('[data-dropdown].open').forEach(function(dd) {
+            if (dd === except) return;
+            dd.classList.remove('open');
+            var btn = dd.querySelector('[data-dropdown-btn]');
+            var menu = dd.querySelector('[data-dropdown-menu]');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+            if (menu) menu.hidden = true;
+        });
+    }
+
+    document.querySelectorAll('[data-dropdown]').forEach(function(dd) {
+        var btn = dd.querySelector('[data-dropdown-btn]');
+        var menu = dd.querySelector('[data-dropdown-menu]');
+        if (!btn || !menu) return;
+
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var willOpen = !dd.classList.contains('open');
+            closeAll(dd);
+            dd.classList.toggle('open', willOpen);
+            btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+            menu.hidden = !willOpen;
+            if (willOpen) {
+                var first = menu.querySelector('a');
+                if (first && window.matchMedia('(min-width: 861px)').matches && dd.closest('.m-nav')) {
+                    try { first.focus({ preventScroll: true }); } catch (err) {}
+                }
+            }
+        });
+
+        menu.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAll();
+                btn.focus();
+            }
+        });
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('[data-dropdown]')) closeAll();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAll();
+    });
+});
+
+// Modern mobile panel
+document.addEventListener('DOMContentLoaded', function() {
+    var panel = document.querySelector('[data-mobile-menu]');
+    var scrim = document.querySelector('[data-mobile-scrim]');
+    var openers = document.querySelectorAll('[data-mobile-open]');
+    var closer = document.querySelector('[data-mobile-close]');
+    if (!panel) return;
+
+    function setPanel(open) {
+        panel.classList.toggle('open', open);
+        panel.hidden = !open;
+        if (scrim) {
+            scrim.hidden = !open;
+            requestAnimationFrame(function() {
+                scrim.classList.toggle('show', open);
+            });
+        }
+        document.body.classList.toggle('menu-open', open);
+        openers.forEach(function(b) {
+            b.setAttribute('aria-expanded', open ? 'true' : 'false');
+            b.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        });
+        if (open) {
+            var first = panel.querySelector('.m-mobile-link');
+            if (first) first.focus({ preventScroll: true });
+        }
+    }
+
+    openers.forEach(function(b) {
+        b.addEventListener('click', function(e) {
+            e.stopPropagation();
+            setPanel(!panel.classList.contains('open'));
+        });
+    });
+
+    if (closer) closer.addEventListener('click', function() { setPanel(false); });
+    if (scrim) scrim.addEventListener('click', function() { setPanel(false); });
+
+    panel.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() { setPanel(false); });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && panel.classList.contains('open')) setPanel(false);
+    });
+
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 860 && panel.classList.contains('open')) setPanel(false);
+    });
+
+    window.pcMobileMenu = { open: function() { setPanel(true); }, close: function() { setPanel(false); } };
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     var menuBtn = document.getElementById('mobileMenuBtn');

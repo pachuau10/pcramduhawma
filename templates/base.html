@@ -37,6 +37,8 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body data-theme="retro">
+    {% include 'includes/modern_navbar.html' %}
+    {% include 'includes/modern_mobile_menu.html' %}
     <div class="page-wrapper">
         {% include 'includes/announcement_bar.html' %}
         {% include 'includes/header.html' %}
@@ -59,6 +61,7 @@
 
         {% include 'includes/footer.html' %}
     </div>
+    {% include 'includes/modern_footer.html' %}
 
     <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar"><span aria-hidden="true">&#9776;</span></button>
 

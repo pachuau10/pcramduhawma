@@ -238,6 +238,15 @@ table {
     color: var(--text-secondary);
 }
 
+/* Modern-mode only elements stay hidden in retro */
+.hero-actions,
+.m-nav,
+.m-mobile,
+.m-scrim,
+.m-footer {
+    display: none;
+}
+
 /* Header Images */
 
 /* ============================================

@@ -43,10 +43,16 @@ def site_settings(request):
         except Exception:
             default_og_image = ''
 
+    try:
+        active_nav = request.path.strip('/').split('/')[0] or 'home'
+    except Exception:
+        active_nav = 'home'
+
     return {
         'site_settings': settings,
         'visitor_count': visitor_count,
         'navigation_items': navigation_items,
         'canonical_url': canonical_url,
         'default_og_image': default_og_image,
+        'active_nav': active_nav,
     }
