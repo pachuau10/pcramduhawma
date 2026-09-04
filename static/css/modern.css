@@ -20,6 +20,66 @@ html[data-theme="modern"] {
     --mradius: 14px;
 }
 
+/* ---------- Retro-mode toggle: big, loud, unmissable ---------- */
+html[data-theme="retro"] .theme-toggle,
+html:not([data-theme]) .theme-toggle {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 5;
+    background: #ffcc00;
+    color: #000000;
+    border: 3px outset #ff9900;
+    font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(255, 204, 0, 0.8), 2px 2px 0px #000000;
+    animation: retroTogglePulse 1.6s infinite;
+}
+
+html[data-theme="retro"] .theme-toggle:hover,
+html:not([data-theme]) .theme-toggle:hover {
+    background: #ffe066;
+    color: #000000;
+    animation: none;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 1), 2px 2px 0px #000000;
+}
+
+html[data-theme="retro"] .theme-toggle:active,
+html:not([data-theme]) .theme-toggle:active {
+    border-style: inset;
+}
+
+html[data-theme="retro"] .theme-toggle-nav,
+html:not([data-theme]) .theme-toggle-nav {
+    position: static;
+    width: 100%;
+    margin-top: 8px;
+    animation: retroTogglePulse 1.6s infinite;
+}
+
+@keyframes retroTogglePulse {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(255, 204, 0, 0.6), 2px 2px 0px #000000;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(255, 204, 0, 1), 2px 2px 0px #000000;
+        transform: scale(1.04);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-theme="retro"] .theme-toggle,
+    html:not([data-theme]) .theme-toggle {
+        animation: none;
+    }
+}
+
 /* ---------- Base ---------- */
 html[data-theme="modern"] body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
@@ -1308,6 +1368,17 @@ html[data-theme="modern"] textarea:focus-visible {
 
     html[data-theme="modern"] .screenshot-thumb {
         width: 100%;
+    }
+}
+
+/* ---------- Retro toggle on small screens: clear of the burger ---------- */
+@media (max-width: 768px) {
+    html[data-theme="retro"] .theme-toggle:not(.theme-toggle-nav),
+    html:not([data-theme]) .theme-toggle:not(.theme-toggle-nav) {
+        top: 6px;
+        right: 58px;
+        font-size: 12px;
+        padding: 6px 12px;
     }
 }
 
