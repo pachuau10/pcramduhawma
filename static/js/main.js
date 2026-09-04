@@ -1,5 +1,52 @@
 // PC Ramduhawma's Homepage - Main JavaScript
-// Minimal JS for mobile menu and lightbox
+// Minimal JS for theme modes, mobile menu and lightbox
+
+// Retro / Modern mode switch (same content, two eras)
+(function() {
+    var KEY = 'pc-theme';
+
+    function read() {
+        try {
+            var t = localStorage.getItem(KEY);
+            return t === 'modern' ? 'modern' : 'retro';
+        } catch (e) {
+            return 'retro';
+        }
+    }
+
+    function paint(t, animate) {
+        if (t !== 'modern') t = 'retro';
+        var modern = t === 'modern';
+        document.documentElement.dataset.theme = t;
+        if (document.body) document.body.dataset.theme = t;
+        try { localStorage.setItem(KEY, t); } catch (e) {}
+        document.querySelectorAll('[data-theme-toggle]').forEach(function(btn) {
+            btn.setAttribute('aria-pressed', modern ? 'true' : 'false');
+            btn.setAttribute('aria-label', modern ? 'Return to retro mode' : 'Switch to modern mode');
+            var label = btn.querySelector('[data-theme-label]');
+            if (label) label.textContent = modern ? 'Retro' : 'Modern';
+            var icon = btn.querySelector('[data-theme-icon]');
+            if (icon) icon.textContent = modern ? '🖥️' : '✨';
+        });
+        if (animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('theme-fade');
+            setTimeout(function() {
+                document.documentElement.classList.remove('theme-fade');
+            }, 320);
+        }
+    }
+
+    window.pcTheme = { get: read, set: function(t) { paint(t, true); } };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        paint(read(), false);
+        document.querySelectorAll('[data-theme-toggle]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                paint(document.documentElement.dataset.theme === 'modern' ? 'retro' : 'modern', true);
+            });
+        });
+    });
+})();
 
 document.addEventListener('DOMContentLoaded', function() {
     var menuBtn = document.getElementById('mobileMenuBtn');

@@ -22,11 +22,21 @@
     <meta name="twitter:title" content="{% block twitter_title %}PC Ramduhawma — Retro Tech{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}Technology, computers, experiments and a nostalgic trip back to the old internet.{% endblock %}">
     <meta name="twitter:image" content="{% block twitter_image %}{{ default_og_image }}{% endblock %}">
+    <script>
+    try {
+        var __theme = localStorage.getItem('pc-theme');
+        if (__theme !== 'modern' && __theme !== 'retro') __theme = 'retro';
+        document.documentElement.dataset.theme = __theme;
+    } catch (e) {
+        document.documentElement.dataset.theme = 'retro';
+    }
+    </script>
     <link rel="stylesheet" href="{% static 'css/retro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modern.css' %}">
     <link rel="icon" type="image/svg+xml" href="{% if site_settings.favicon %}{{ site_settings.favicon.url }}{% else %}{% static 'images/favicon.svg' %}{% endif %}">
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body data-theme="retro">
     <div class="page-wrapper">
         {% include 'includes/announcement_bar.html' %}
         {% include 'includes/header.html' %}
